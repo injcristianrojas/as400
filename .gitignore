@@ -5,3 +5,5 @@ as400.properties
 .project
 *eclipse*
 logs/*
+bin*
+.classpath
