@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'org.owasp.dependencycheck' version '6.1.5'
+    id 'com.github.spotbugs' version '4.7.0'
 }
 
 group 'cl.injcristianrojas'
@@ -21,8 +22,16 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation 'net.sf.jt400:jt400-jdk8:10.6'
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+spotbugs {
+    ignoreFailures = true
+    tasks.spotbugsMain {
+        reports.create("html")
+    }
 }
