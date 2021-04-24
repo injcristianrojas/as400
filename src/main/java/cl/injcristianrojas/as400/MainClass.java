@@ -13,7 +13,7 @@ public class MainClass {
         CommandCall cmd = new CommandCall(server);
 
         try {
-            cmd.run("DSPLIB LIB(QGPL)");
+            cmd.run("DSPLIB PUB400SYS");
             AS400Message[] messageList = cmd.getMessageList();
 
             for (AS400Message msg: messageList) {
