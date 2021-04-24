@@ -1,9 +1,10 @@
 .gradle/*
-build/*
 .idea/*
+.vscode/*
+build/*
+logs/*
+*eclipse*
 as400.properties
 .project
-*eclipse*
-logs/*
 bin*
 .classpath
