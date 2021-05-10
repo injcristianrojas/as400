@@ -1,29 +1,54 @@
 package cl.injcristianrojas.as400;
 
-import com.ibm.as400.access.AS400;
-import com.ibm.as400.access.AS400Message;
-import com.ibm.as400.access.CommandCall;
+import com.ibm.as400.access.*;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
 
 public class MainClass {
 
+    static ConnectionData connData;
+
     public static void main(String[] args) {
-        ConnectionData connData = new ConnectionData();
+        connData = new ConnectionData();
+        connectionTest();
+        testJDBC("hmaturana");
+    }
 
-        AS400 server = new AS400(connData.getHost(), connData.getUsername(), connData.getPassword());
-        CommandCall cmd = new CommandCall(server);
-
+    private static void testJDBC(String username) {
         try {
-            cmd.run("DSPLIB PUB400SYS");
-            AS400Message[] messageList = cmd.getMessageList();
-
-            for (AS400Message msg: messageList) {
-                System.out.println(msg.getText());
-            }
-        } catch (Exception e) {
+            Class.forName("com.ibm.as400.access.AS400JDBCDriver");
+            Connection conn = DriverManager.getConnection("jdbc:as400://pub400.com/" + connData.getUsername() + "1", connData.getUsername(), connData.getPassword());
+            Statement stmt = conn.createStatement();
+            ResultSet rs;
+            rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username +"'");
+            while ( rs.next() )
+                System.out.println(String.format("User selected: %s %s", rs.getString("name"), rs.getString("surname")));
+            rs.close();
+            conn.close();
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+    }
 
-        server.disconnectService(AS400.COMMAND);
+    private static void connectionTest() {
+        boolean successful;
+
+        AS400 as400 = new AS400(connData.getHost(), connData.getUsername(), connData.getPassword());
+        try {
+            successful = as400.validateSignon();
+        } catch (AS400SecurityException e) {
+            successful = false;
+        } catch (IOException e) {
+            successful = false;
+        }
+        System.out.println(successful);
+
+        as400.disconnectAllServices();
     }
 
 }
