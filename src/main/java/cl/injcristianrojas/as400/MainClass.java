@@ -22,7 +22,7 @@ public class MainClass {
     private static void testJDBC(String username) {
         try {
             Class.forName("com.ibm.as400.access.AS400JDBCDriver");
-            Connection conn = DriverManager.getConnection("jdbc:as400://pub400.com/" + connData.getUsername() + "1", connData.getUsername(), connData.getPassword());
+            Connection conn = DriverManager.getConnection("jdbc:as400://pub400.com/" + connData.getMainLibrary(), connData.getUsername(), connData.getPassword());
             Statement stmt = conn.createStatement();
             ResultSet rs;
             rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username +"'");

@@ -7,6 +7,7 @@ public class ConnectionData {
     private String host;
     private String username;
     private String password;
+    private String mainLibrary;
 
     public ConnectionData() {
         try {
@@ -16,11 +17,13 @@ public class ConnectionData {
             this.host = p.getProperty("hostname");
             this.username = p.getProperty("username");
             this.password = p.getProperty("password");
+            this.mainLibrary = p.getProperty("mainLibrary");
         } catch (Exception e) {
             e.printStackTrace();
             this.host = null;
             this.username = null;
             this.password = null;
+            this.mainLibrary = null;
         }
     }
 
@@ -35,4 +38,6 @@ public class ConnectionData {
     public String getPassword() {
         return this.password;
     }
+
+    public String getMainLibrary() { return this.mainLibrary; }
 }
