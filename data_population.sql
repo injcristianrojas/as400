@@ -1,3 +1,5 @@
+-- Enter these in a STRSQL session or similar.
+
 CREATE TABLE users(
  name VARCHAR(12) NOT NULL,
  surname VARCHAR(15) NOT NULL,
