@@ -16,7 +16,7 @@ public class MainClass {
     public static void main(String[] args) {
         connData = new ConnectionData();
         connectionTest();
-        testJDBC("hmaturana");
+        testJDBC("hmaturana' or '1'='1");
     }
 
     private static void testJDBC(String username) {
@@ -27,7 +27,7 @@ public class MainClass {
             ResultSet rs;
             rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username +"'");
             while ( rs.next() )
-                System.out.println(String.format("User selected: %s %s", rs.getString("name"), rs.getString("surname")));
+                System.out.printf("User selected: %s %s%n", rs.getString("name"), rs.getString("surname"));
             rs.close();
             conn.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -41,12 +41,10 @@ public class MainClass {
         AS400 as400 = new AS400(connData.getHost(), connData.getUsername(), connData.getPassword());
         try {
             successful = as400.validateSignon();
-        } catch (AS400SecurityException e) {
-            successful = false;
-        } catch (IOException e) {
+        } catch (AS400SecurityException | IOException e) {
             successful = false;
         }
-        System.out.println(successful);
+        System.out.println(successful ? "Connection OK" : "Connection error");
 
         as400.disconnectAllServices();
     }
