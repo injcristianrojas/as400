@@ -15,8 +15,7 @@ public class MainClass {
 
     public static void main(String[] args) {
         connData = new ConnectionData();
-        connectionTest();
-        testJDBC("hmaturana", "123' or '1'='1");
+        testJDBC("hmaturana", "123");
     }
 
     private static void testJDBC(String username, String password) {
