@@ -18,16 +18,19 @@ idea {
 }
 
 repositories {
+    mavenCentral()
+    /*
     maven {
         url 'http://localhost:8081/repository/main/'
         allowInsecureProtocol = true
     }
+    */
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    implementation 'net.sf.jt400:jt400-jdk8:10.6'
+    implementation 'net.sf.jt400:jt400:6.6'
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
 }
 
