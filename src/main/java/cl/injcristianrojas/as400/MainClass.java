@@ -11,11 +11,11 @@ import java.sql.SQLException;
 
 public class MainClass {
 
-    static ConnectionData connData;
+    private static ConnectionData connData;
 
     public static void main(String[] args) {
         connData = new ConnectionData();
-        testJDBC("hmaturana", "123");
+        testJDBC("hmaturana", "12345");
     }
 
     private static void testJDBC(String username, String password) {
