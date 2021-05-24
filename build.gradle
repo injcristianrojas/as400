@@ -42,6 +42,9 @@ test {
 
 spotbugs {
     ignoreFailures = true
+    showStackTraces = false
+    effort = 'max'
+    reportLevel = 'medium'
     tasks.spotbugsMain {
         reports.create("html")
     }
