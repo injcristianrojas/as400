@@ -4,8 +4,9 @@
 build/*
 logs/*
 out/*
+bin/*
 *eclipse*
 src/main/resources/as400.properties
 .project
-bin*
 .classpath
+.dccache
