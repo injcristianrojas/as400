@@ -3,6 +3,7 @@
 .vscode/*
 build/*
 logs/*
+out/*
 *eclipse*
 src/main/resources/as400.properties
 .project
