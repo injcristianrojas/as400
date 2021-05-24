@@ -31,7 +31,8 @@ public class MainClass {
             Class.forName("com.ibm.as400.access.AS400JDBCDriver");
             Connection conn = DriverManager.getConnection("jdbc:as400://pub400.com/" + connData.getMainLibrary(), connData.getUsername(), connData.getPassword());
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username +"' and password = '" + password + "'");
+            String sql = "SELECT * FROM users WHERE username = '" + username +"' and password = '" + password + "'";
+            ResultSet rs = stmt.executeQuery(sql);
             int rows = 0;
             while ( rs.next() ) {
                 //logger.info(String.format("User selected: %s %s%n", rs.getString("name"), rs.getString("surname")));
