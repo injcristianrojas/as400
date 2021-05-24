@@ -35,7 +35,6 @@ public class MainClass {
             ResultSet rs = stmt.executeQuery(sql);
             int rows = 0;
             while ( rs.next() ) {
-                //logger.info(String.format("User selected: %s %s%n", rs.getString("name"), rs.getString("surname")));
                 rows++;
             }
             rs.close();
