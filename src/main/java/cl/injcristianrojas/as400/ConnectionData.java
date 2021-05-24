@@ -11,7 +11,7 @@ public class ConnectionData {
 
     public ConnectionData() {
         try {
-            FileReader reader = new FileReader("as400.properties");
+            FileReader reader = new FileReader("src/main/resources/as400.properties");
             Properties p = new Properties();
             p.load(reader);
             this.host = p.getProperty("hostname");

@@ -4,7 +4,7 @@
 build/*
 logs/*
 *eclipse*
-as400.properties
+src/main/resources/as400.properties
 .project
 bin*
 .classpath
