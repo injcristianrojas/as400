@@ -9,9 +9,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class MainClass {
 
     private static ConnectionData connData;
+    private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
         connData = new ConnectionData();
@@ -20,7 +24,7 @@ public class MainClass {
 
     private static void testJDBC(String username, String password) {
         if (!connectionTest()) {
-            System.out.println("Connection error. Shutting down...");
+            logger.error("Connection error. Shutting down...");
             return;
         }
         try {
@@ -30,12 +34,15 @@ public class MainClass {
             ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + username +"' and password = '" + password + "'");
             int rows = 0;
             while ( rs.next() ) {
-                //System.out.printf("User selected: %s %s%n", rs.getString("name"), rs.getString("surname"));
+                //logger.info(String.format("User selected: %s %s%n", rs.getString("name"), rs.getString("surname")));
                 rows++;
             }
             rs.close();
             conn.close();
-            System.out.println(rows > 0 ? "Login successful" : "Username/password incorrect");
+            if (rows > 0)
+                logger.info("Login successful");
+            else
+                logger.error("Username/password incorrect");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
