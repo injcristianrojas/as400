@@ -48,7 +48,7 @@ public class MainClass {
             else
                 logger.error("Username/password incorrect");
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
